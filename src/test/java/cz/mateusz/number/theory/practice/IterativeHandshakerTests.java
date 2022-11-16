@@ -6,43 +6,42 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class HandshakerTests {
+public class IterativeHandshakerTests {
 
-    private Handshaker handshaker;
+    private IterativeHandshaker iterativeHandshaker;
 
     @BeforeEach
     public void incorporateObjects() {
-        this.handshaker = new Handshaker();
+        this.iterativeHandshaker = new IterativeHandshaker();
     }
 
     @Test
-    public void when_thereAreNoPersonsAtAll_then_noHandshakesAreMade() {
-        int handshakes = handshaker.makeHandshake(0);
+    public void when_thereAreNoGuests_then_noHandshakesAreMade() {
+        int handshakes = iterativeHandshaker.makeHandshake(0);
         assertThat(handshakes, is(0));
     }
 
     @Test
-    public void when_thereIsOnlyOnePerson_then_noHandshakesAreMade() {
-        int handshakes = handshaker.makeHandshake(1);
+    public void when_thereIsOnlyOneGuest_then_noHandshakesAreMade() {
+        int handshakes = iterativeHandshaker.makeHandshake(1);
         assertThat(handshakes, is(0));
     }
 
     @Test
-    public void when_thereAreTwoPersons_then_oneHandshakeIsMade() {
-        // Total number of handshakes where there is n persons, and n >= 2 is equal to h(n - 1) + (n - 1);
-        int handshakes = handshaker.makeHandshake(2);
+    public void when_thereAreTwoGuests_then_oneHandshakeIsMade() {
+        int handshakes = iterativeHandshaker.makeHandshake(2);
         assertThat(handshakes, is(1));
     }
 
     @Test
     public void when_thereAreFourPersons_then_sixHandshakesAreMade() {
-        int handshakes = handshaker.makeHandshake(4);
+        int handshakes = iterativeHandshaker.makeHandshake(4);
         assertThat(handshakes, is(6));
     }
 
     @Test
     public void when_thereAreOneHundredPersons_then_4950_handshakesAreMade() {
-        int handshakes = handshaker.makeHandshake(100);
+        int handshakes = iterativeHandshaker.makeHandshake(100);
         assertThat(handshakes, is(4950));
     }
 }
